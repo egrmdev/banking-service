@@ -1,0 +1,12 @@
+services:
+  banking-service:
+    image: egrmdev/banking-service:latest
+    depends_on:
+      - postgresql
+    ports:
+      - 8080:8080
+
+  postgresql:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: pwd

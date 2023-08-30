@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: banking-service
+  datasource:
+    url: jdbc:postgresql://postgresql:5432/postgres
+    username: postgres
+    password: pwd
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 20
+      pool-name: default-pool
+      leak-detection-threshold: 2000
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL10Dialect
+  liquibase:
+    change-log: classpath:/db/migrations/changelog.yaml
+server:
+  port: 8080
+logging:
+  file:
+    name: logs/banking-service.log

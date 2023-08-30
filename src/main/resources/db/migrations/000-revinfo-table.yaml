@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - logicalFilePath: '000-revinfo-table.yaml'
+
+  - changeSet:
+      id: '000-1'
+      author: egrmdev
+      comment: 'create revinfo table'
+      changes:
+        - createSequence:
+              sequenceName: revinfo_seq
+              startValue: 1
+              dataType: bigint
+              cycle: false
+              cache: 1
+              incrementBy: 1
+              minValue: 1
+        - createTable:
+            tableName: revinfo
+            columns:
+              - column:
+                  name: rev
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: revtstmp
+                  type: bigint
+                  constraints:
+                    nullable: false

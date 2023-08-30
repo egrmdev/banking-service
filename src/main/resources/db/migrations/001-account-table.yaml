@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - logicalFilePath: '001-account-table'
+
+  - changeSet:
+      id: '001-1'
+      author: egrmdev
+      comment: 'Create account and account_aud table'
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: balance_in_cents
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: account_aud
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    - primaryKey: true
+                    - nullable: false
+              - column:
+                  name: balance_in_cents
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rev
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    references: revinfo(rev)
+                    foreignKeyName: fk_account_aud__revinfo
+              - column:
+                  name: revtype
+                  type: smallint

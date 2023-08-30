@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+        file: 000-revinfo-table.yaml
+        relativeToChangelogFile: true
+  - include:
+      file: 001-account-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: 002-transaction-table.yaml
+      relativeToChangelogFile: true

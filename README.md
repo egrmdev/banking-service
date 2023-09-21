@@ -1,26 +1,29 @@
-## Original task
+## Description
 
-The task is to build the basic REST API for banking.
+A service that offers very basic REST API for bank account creation and money transfer between accounts.
 
 ### Details
 
-Consider using following simplified data model:
+The following simplified data model is used:
+
+Account
 ```
-Account:
-- accountId - unique account identifier
+- id - unique account identifier
 - balance - account balance
+```
 
 Transaction:
-- txId - unique transacion identifier
+```
+- id - unique transacion identifier
 - amount - transferred amount
 - from - source account id
 - to - destination account id
 ```
 
-Implement following banking APIs:
-- create new account with predefined balance
-- fetch account balance by `accountId`
-- create transaction between two accounts, that impacts account balance
+The following banking APIs are implemented:
+- creating a new account with predefined balance
+- fetching account by `accountId`
+- creating a money transfer transaction between two accounts 
 
 ## Implementation
 
@@ -87,8 +90,6 @@ An alternative would be `BigDecimal`, which would have to be rounded to ensure p
 e.g, with `BigDecimal#setScale(2, RoundingMode.HALF_EVEN)`. More complex calculations resulting 
 in numbers with fractions would still be carried out in runtime by using `BigDecimal`, which would 
 then be converted to cents and persisted.
-- Atomicity of account updates in case of concurrent transfers is handled by setting transaction 
-isolation level to repeatable read. Alternatives would be optimistic and pessimistic locking.
-- No dedicated endpoint for fetching account's balance because in the current simplified model
-it wouldn't be RESTful.
-- Spring's default error responses for cases like a non-existent endpoint path weren't customised.
+- Atomicity of account updates in case of concurrent transfers to prevent double-spending problem
+is handled by setting transaction isolation level to repeatable read.
+Alternatives would be optimistic and pessimistic locking.
